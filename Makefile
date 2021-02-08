@@ -47,11 +47,16 @@ lint: install
 	golangci-lint run -c .golangci.yml --fix
 
 .PHONY: test
-test: ## go test with race detector and code covarage
+test: ## go test with race detector and code coverage
 test: install
 	$(call print-target)
-	go-acc --covermode=atomic --output=coverage.out ./... -- -race
+	go-acc --covermode=atomic --output=coverage.out ./... -- -race -short -v
 	go tool cover -html=coverage.out -o coverage.html
+
+.PHONY: integration-test
+integration-test: ## go test with race detector for integration tests
+	$(call print-target)
+	go test -race -run Integration -v ./...
 
 .PHONY: mod-tidy
 mod-tidy: ## go mod tidy

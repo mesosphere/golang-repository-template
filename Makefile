@@ -31,6 +31,7 @@ install: ## go install tools
 
 .PHONY: generate
 generate: ## go generate
+generate: install
 	$(call print-target)
 	go generate ./...
 
@@ -41,13 +42,15 @@ build: ## go build
 
 .PHONY: lint
 lint: ## golangci-lint
+lint: install
 	$(call print-target)
 	golangci-lint run -c .golangci.yml --fix
 
 .PHONY: test
 test: ## go test with race detector and code covarage
+test: install
 	$(call print-target)
-	go test -race -covermode=atomic -coverprofile=coverage.out ./...
+	go-acc --covermode=atomic --output=coverage.out ./... -- -race
 	go tool cover -html=coverage.out -o coverage.html
 
 .PHONY: mod-tidy

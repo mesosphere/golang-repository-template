@@ -7,7 +7,7 @@ It includes:
 - build automation via [Make](https://www.gnu.org/software/make),
 - dependency management using [Go Modules](https://github.com/golang/go/wiki/Modules),
 - linting with [golangci-lint](https://github.com/golangci/golangci-lint),
-- unit testing with [testify](https://github.com/stretchr/testify), [race detector](https://blog.golang.org/race-detector), code covarage [HTML report](https://blog.golang.org/cover) and [Codecov report](https://codecov.io/),
+- unit testing with [testify](https://github.com/stretchr/testify), [race detector](https://blog.golang.org/race-detector), code covarage [HTML report](https://blog.golang.org/cover) using [go-acc](https://github.com/ory/go-acc) for accurate reporting,
 - releasing using [GoReleaser](https://github.com/goreleaser/goreleaser),
 - dependencies scanning and updating thanks to [Dependabot](https://dependabot.com),
 - [Visual Studio Code](https://code.visualstudio.com) configuration with [Go](https://code.visualstudio.com/docs/languages/go) and [Remote Container](https://code.visualstudio.com/docs/remote/containers) support.
@@ -69,10 +69,6 @@ release:
 ```
 
 Alternatively, you can completly remove the usage of GoReleaser if you prefer handcrafted release notes.
-
-### Why the code coverage results are not accurate
-
-By default `go test` records code coverage for the package that is currently tested. If you want to get more accurate (cross-package) coverage, then consider using [go-acc](https://github.com/ory/go-acc). [Read more](https://www.ory.sh/golang-go-code-coverage-accurate/).
 
 ## Contributing
 

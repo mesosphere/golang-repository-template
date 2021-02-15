@@ -2,6 +2,8 @@
 
 SHELL := /bin/bash -euo pipefail
 
+INTERACTIVE := $(shell [ -t 0 ] && echo 1)
+
 export GOMODULENAME := $(shell go list -m)
 
 ifneq ($(shell git status --porcelain 2>/dev/null; echo $$?), 0)
@@ -99,7 +101,7 @@ go-clean: ## go clean build, test and modules caches
 
 .PHONY: docker
 docker: ## run in golang container, example: make docker run="make ci"
-	docker run --rm -it \
+	docker run --rm $(if $(INTERACTIVE),-it) \
 		-v $(CURDIR):/repo $(args) \
 		-w /repo \
 		golang:1.15 $(run)

@@ -83,7 +83,7 @@ release: install
 	goreleaser --rm-dist
 
 .PHONY: release-snapshot
-release-snapshot: ## goreleaser --rm-dist
+release-snapshot: ## goreleaser --snapshot --rm-dist
 release-snapshot: install
 	$(call print-target)
 	goreleaser release --snapshot --skip-publish --rm-dist

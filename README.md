@@ -17,7 +17,7 @@ This work is based on the upstream [Go Repository Template](https://github.com/g
 ## Usage
 
 1. Click the `Use this template` button (alt. clone or download this repository).
-1. Replace all occurences of `jimmidyson/golang-repository-template` to `your_org/repo_name` in all files.
+1. Replace all occurences of `mesosphere/golang-repository-template` to `your_org/repo_name` in all files.
 1. Rename folder `cmd/seed` to `cmd/app_name` and update [.goreleaser.yml](.goreleaser.yml) accordingly.
 1. Update [LICENSE](LICENSE) and [README.md](README.md).
 

@@ -6,8 +6,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/jimmidyson/golang-repository-template/pkg/calculator"
-	"github.com/jimmidyson/golang-repository-template/pkg/testutils"
+	"github.com/mesosphere/golang-repository-template/pkg/calculator"
+	"github.com/mesosphere/golang-repository-template/pkg/testutils"
 )
 
 func TestAdd(t *testing.T) {

@@ -5,8 +5,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/jimmidyson/golang-repository-template/pkg/calculator"
-	"github.com/jimmidyson/golang-repository-template/pkg/version"
+	"github.com/mesosphere/golang-repository-template/pkg/calculator"
+	"github.com/mesosphere/golang-repository-template/pkg/version"
 )
 
 func main() {

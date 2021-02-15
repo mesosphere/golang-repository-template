@@ -30,7 +30,7 @@ builds:
       - arm64
 dockers:
   - image_templates:
-    - "jimmidyson/{{.ProjectName}}:{{ .Tag }}-amd64"
+    - "mesosphere/{{.ProjectName}}:{{ .Tag }}-amd64"
     dockerfile: Dockerfile
     use_buildx: true
     build_flag_templates:
@@ -42,7 +42,7 @@ dockers:
       - "--label=org.opencontainers.image.source={{.GitURL}}"
       - "--platform=linux/amd64"
   - image_templates:
-    - "jimmidyson/{{.ProjectName}}:{{ .Tag }}-arm64"
+    - "mesosphere/{{.ProjectName}}:{{ .Tag }}-arm64"
     dockerfile: Dockerfile
     use_buildx: true
     build_flag_templates:
@@ -55,10 +55,10 @@ dockers:
       - "--platform=linux/arm64"
     goarch: arm64
 docker_manifests:
-  - name_template: "jimmidyson/{{.ProjectName}}:{{ .Tag }}"
+  - name_template: "mesosphere/{{.ProjectName}}:{{ .Tag }}"
     image_templates:
-      - "jimmidyson/{{.ProjectName}}:{{ .Tag }}-amd64"
-      - "jimmidyson/{{.ProjectName}}:{{ .Tag }}-arm64"
+      - "mesosphere/{{.ProjectName}}:{{ .Tag }}-amd64"
+      - "mesosphere/{{.ProjectName}}:{{ .Tag }}-arm64"
 archives:
   - format_overrides:
     - goos: windows

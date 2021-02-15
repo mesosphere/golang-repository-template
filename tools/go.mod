@@ -1,4 +1,4 @@
-module github.com/jimmidyson/golang-repository-template/tools
+module github.com/mesosphere/golang-repository-template/tools
 
 go 1.15
 

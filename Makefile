@@ -14,7 +14,7 @@ endif
 
 .PHONY: dev
 dev: ## dev build
-dev: clean install generate build lint test mod-tidy build-snapshot
+dev: clean install-tools generate build lint test mod-tidy build-snapshot
 
 .PHONY: ci
 ci: ## CI build
@@ -26,14 +26,14 @@ clean: ## remove files created during build
 	rm -rf dist
 	rm -f coverage.*
 
-.PHONY: install
-install: ## go install tools
+.PHONY: install-tools
+install-tools: ## go install tools
 	$(call print-target)
 	cd tools && go install -v $(shell cd tools && go list -f '{{ join .Imports " " }}' -tags=tools)
 
 .PHONY: generate
 generate: ## go generate
-generate: install
+generate: install-tools
 	$(call print-target)
 	go generate ./...
 
@@ -44,13 +44,13 @@ build: ## go build
 
 .PHONY: lint
 lint: ## golangci-lint
-lint: install
+lint: install-tools
 	$(call print-target)
 	golangci-lint run -c .golangci.yml --fix
 
 .PHONY: test
 test: ## go test with race detector and code coverage
-test: install
+test: install-tools
 	$(call print-target)
 	go-acc --covermode=atomic --output=coverage.out ./... -- -race -short -v
 	go tool cover -html=coverage.out -o coverage.html
@@ -68,7 +68,7 @@ mod-tidy: ## go mod tidy
 
 .PHONY: build-snapshot
 build-snapshot: ## goreleaser build --snapshot --rm-dist
-build-snapshot: install
+build-snapshot: install-tools
 	$(call print-target)
 	goreleaser build --snapshot --rm-dist
 
@@ -80,19 +80,15 @@ diff: ## git diff
 
 .PHONY: release
 release: ## goreleaser --rm-dist
-release: install
+release: install-tools
 	$(call print-target)
 	goreleaser --rm-dist
 
 .PHONY: release-snapshot
 release-snapshot: ## goreleaser --snapshot --rm-dist
-release-snapshot: install
+release-snapshot: install-tools
 	$(call print-target)
 	goreleaser release --snapshot --skip-publish --rm-dist
-
-.PHONY: run
-run: ## go run
-	@go run -race ./cmd/seed
 
 .PHONY: go-clean
 go-clean: ## go clean build, test and modules caches

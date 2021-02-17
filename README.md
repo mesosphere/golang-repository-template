@@ -21,10 +21,23 @@ This work is based on the upstream [Go Repository Template](https://github.com/g
 1. Rename folder `cmd/seed` to `cmd/app_name` and update [.goreleaser.yml](.goreleaser.yml) accordingly.
 1. Update [LICENSE](LICENSE) and [README.md](README.md).
 
-## Build
+## Build and Test
 
-- Terminal: `make` to get help for make targets.
-- Visual Studio Code: `Terminal` → `Run Build Task... (CTRL+SHIFT+B)` to execute a fast build.
+Tip: to see all available make targets with descriptions, simply run `make`.
+
+To run unit tests, run `make test`.
+
+To run integration tests, run `make integration-test`.
+
+To build development binaries (specified in [`.goreleaser.yml`](.goreleaser.yml)), run `make build-snapshot` This will output binaries in [`dist`](dist) for all configured platforms.
+
+To build a release snapshot locally (including all configured packages, etc in [`.goreleaser.yml`](.goreleaser.yml)), run `make release-snapshot`.
+
+To build a full release, including publishing release artifacts, run `make release`.
+
+To run any command inside the Docker container used in CI, run `make docker run="make <target>"`.
+
+To run `seed` command without building output binaries, run `go run ./cmd/seed/main.go <subcommands_and_flags>`
 
 ## Release
 
@@ -43,6 +56,8 @@ Notable files:
 - [Makefile](Makefile) - Make targets used for development, and [.vscode/tasks.json](.vscode/tasks.json),
 - [go.mod](go.mod) - [Go module definition](https://github.com/golang/go/wiki/Modules#gomod),
 - [tools.go](tools.go) - [build tools](https://github.com/golang/go/wiki/Modules#how-can-i-track-tool-dependencies-for-a-module).
+- [`cmd`](cmd) - Commands and their respective subcommands, thin wrappers over the library code in [`pkg`](pkg).
+- [`pkg`](pkg) - All library code for this project.
 
 ## FAQ
 

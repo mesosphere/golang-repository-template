@@ -100,7 +100,7 @@ docker: ## run in golang container, example: make docker run="make ci"
 	docker run --rm $(if $(INTERACTIVE),-it) \
 		-v $(CURDIR):/repo $(args) \
 		-w /repo \
-		golang:1.15 $(run)
+		golang:1.16 $(run)
 
 .PHONY: help
 help:

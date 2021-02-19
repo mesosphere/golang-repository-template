@@ -1,4 +1,4 @@
-FROM golang:1.15.8
+FROM golang:1.16
 
 ARG USERNAME=dkp-dev
 ARG USER_UID=1000

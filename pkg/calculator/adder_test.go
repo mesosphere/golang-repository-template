@@ -12,7 +12,7 @@ import (
 
 func TestAdd(t *testing.T) {
 	t.Parallel()
-	args := []struct {
+	tests := []struct {
 		i, j, expected int
 	}{{
 		1, 1, 2,
@@ -21,10 +21,11 @@ func TestAdd(t *testing.T) {
 	}, {
 		100, 200, 300,
 	}}
-	for _, arg := range args {
-		t.Run(fmt.Sprintf("%d+%d=%d", arg.i, arg.j, arg.expected), func(t *testing.T) {
+	for _, tt := range tests {
+		tt := tt // Capture range variable.
+		t.Run(fmt.Sprintf("%d+%d=%d", tt.i, tt.j, tt.expected), func(t *testing.T) {
 			t.Parallel()
-			assert.Equal(t, arg.expected, calculator.Add(arg.i, arg.j))
+			assert.Equal(t, tt.expected, calculator.Add(tt.i, tt.j))
 		})
 	}
 }

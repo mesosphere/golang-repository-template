@@ -4,7 +4,10 @@ SHELL := /bin/bash -euo pipefail
 
 INTERACTIVE := $(shell [ -t 0 ] && echo 1)
 
+DOCKER_REPOSITORY ?= mesosphere
+
 export GOMODULENAME := $(shell go list -m)
+export DOCKER_REPOSITORY := $(DOCKER_REPOSITORY)
 
 ifneq ($(shell git status --porcelain 2>/dev/null; echo $$?), 0)
 	export GIT_TREE_STATE := dirty

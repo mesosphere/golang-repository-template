@@ -5,7 +5,15 @@ env:
   - GO111MODULE=on
 builds:
   - main: ./cmd/seed/main.go
-    mod_timestamp: "{{ .CommitTimestamp }}"
+    # Set the mod_timestamp to the build time for snapshot builds. This is
+    # necessary for docker builder (buildx) to detect the new binary version and
+    # use it in the Dockerfile. If CommitTimestamp would be used for snapshot
+    # builds the binary would get rebuilt by goreleaser but docker would assume
+    # it is unchanged becuase of the existing timestamp and instead of adding
+    # newly built binary version to the image the docker would use cached layer
+    # (previous docker build) and not include new binary version in the final
+    # docker image.
+    mod_timestamp: "{{if .IsSnapshot}}{{ .Timestamp }}{{else}}{{ .CommitTimestamp }}{{end}}"
     env:
       - CGO_ENABLED=0
     flags:

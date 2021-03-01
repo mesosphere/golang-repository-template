@@ -44,7 +44,11 @@ dockers:
   - image_templates:
     - "{{.Env.DOCKER_REPOSITORY}}/{{.ProjectName}}:{{ .Tag }}-arm64"
     dockerfile: Dockerfile
-    use_buildx: true
+    # Using buildx can result in outdated builds when buildx would incorrectly
+    # use cached build layers for updated artifacts. Until the issue is resolved
+    # we cannot reliably use buildx for builds.
+    # https://github.com/moby/buildkit/issues/1368
+    use_buildx: false
     build_flag_templates:
       - "--pull"
       - "--label=org.opencontainers.image.created={{.Date}}"

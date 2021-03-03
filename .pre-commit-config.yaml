@@ -43,7 +43,7 @@ repos:
   - id: gitlint
     stages: [commit-msg]
 - repo: https://github.com/jumanjihouse/pre-commit-hooks
-  rev: 2.1.4
+  rev: 2.1.5
   hooks:
   - id: shellcheck
     stages: [commit]
@@ -55,8 +55,8 @@ repos:
   - id: script-must-have-extension
     stages: [commit]
 - repo: https://github.com/golangci/golangci-lint
-  rev: v1.36.0
+  rev: v1.38.0
   hooks:
   - id: golangci-lint
-    args: ["-c", ".golangci.yml"]
+    args: ["-c", ".golangci.yml", "--fix"]
     stages: [commit]
